@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: spring-boot-4
+
+  config:
+    import: "optional:configserver:"
+
+  main:
+    keep-alive: true
+
+  datasource:
+    url: jdbc:mysql://localhost/boot4?createDatabaseIfNotExist=true&rewriteBatchedStatements=true
+    username: root
+    password: 111111
+    hikari:
+      maximum-pool-size: 30
+      connection-timeout: 3000
+      connection-test-query: SELECT 1
+
+  jpa:
+    properties:
+      "[hibernate.show_sql]": false
+      "[hibernate.format_sql]": true
+      "[hibernate.globally_quoted_identifiers]": true
+      "[hibernate.jdbc.batch_size]": 50
+      "[hibernate.order_inserts]": true
+      "[hibernate.order_updates]": true
+      "[hibernate.default_batch_fetch_size]": 50
+      "[hibernate.query.in_clause_parameter_padding]": true
+    open-in-view: false
+    defer-datasource-initialization: true
+
+  task:
+    execution:
+      thread-name-prefix: async-executor
+
+  http:
+    clients:
+      read-timeout: 30s
+      connect-timeout: 3s
+
+  cloud:
+    config:
+      label: ${project.version}
+    discovery:
+      enabled: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  cache:
+    type: redis
+    redis:
+      key-prefix: "\${spring.application.name}:${project.version}:"
+
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+#    serialization:
+#      write-dates-as-timestamps: true
+#      write-date-timestamps-as-nanoseconds: false
+#    deserialization:
+#      read-date-timestamps-as-nanoseconds: false
