@@ -58,8 +58,8 @@ spring:
   jackson:
     mapper:
       accept-case-insensitive-enums: true
-#    serialization:
-#      write-dates-as-timestamps: true
-#      write-date-timestamps-as-nanoseconds: false
-#    deserialization:
-#      read-date-timestamps-as-nanoseconds: false
+    datatype:
+      datetime:
+        write-dates-as-timestamps: true
+        write-date-timestamps-as-nanoseconds: false
+        read-date-timestamps-as-nanoseconds: false
