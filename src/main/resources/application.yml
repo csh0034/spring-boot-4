@@ -58,8 +58,9 @@ spring:
   jackson:
     mapper:
       accept-case-insensitive-enums: true
+      sort-properties-alphabetically: false # 3.0 에서 기본값 변경됨
     datatype:
       datetime:
-        write-dates-as-timestamps: true
+        write-dates-as-timestamps: true # 3.0 에서 기본값 변경됨
         write-date-timestamps-as-nanoseconds: false
         read-date-timestamps-as-nanoseconds: false
