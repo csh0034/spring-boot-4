@@ -70,3 +70,7 @@ spring:
       required: false # 지정안할 경우 default 값이 있으면 false 로 설정됨
       use:
         query-parameter: version
+
+logging:
+  level:
+    "[org.springframework.core.retry.RetryTemplate]": debug
