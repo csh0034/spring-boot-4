@@ -64,6 +64,10 @@ spring:
         write-dates-as-timestamps: true # 3.0 에서 기본값 변경됨
         write-date-timestamps-as-nanoseconds: false
         read-date-timestamps-as-nanoseconds: false
+    deserialization:
+      fail-on-null-for-primitives: false # 3.0 에서 기본값 변경됨
+      fail-on-unknown-properties: true # 3.0 에서 기본값 변경됨
+
   mvc:
     apiversion:
 #      default: 1.0.0
