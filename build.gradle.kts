@@ -70,10 +70,6 @@ allOpen {
   annotation("jakarta.persistence.Embeddable")
 }
 
-tasks.withType<Test> {
-  useJUnitPlatform()
-}
-
 tasks {
   test {
     useJUnitPlatform()
