@@ -8,6 +8,7 @@
 
 - spring 7 은 jdk25 를 권하지만 kotlin 2.2 기준 java25 미지원, 2.3.0-Beta2 부터 지원함
 - 2.3.0: Planned for December 2025 – January 2026
+  - 25.12.16 ga released
 
 ## Spring 7 관련
 
