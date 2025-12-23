@@ -67,6 +67,11 @@ spring:
     deserialization:
       fail-on-null-for-primitives: false # 3.0 에서 기본값 변경됨
       fail-on-unknown-properties: false # 3.0 에서 기본값 변경되었지만 스프링 설정에 의해 false 였음
+    visibility:
+      field: any
+      getter: none
+      is-getter: none
+    default-property-inclusion: non_null
 
   mvc:
     apiversion:

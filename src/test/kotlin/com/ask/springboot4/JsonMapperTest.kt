@@ -1,7 +1,12 @@
 package com.ask.springboot4
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonValue
-import org.assertj.core.api.Assertions.*
+import com.fasterxml.jackson.annotation.PropertyAccessor
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatNoException
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.MapperFeature
@@ -27,6 +32,24 @@ class JsonMapperTest {
     disable(DateTimeFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)
     disable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)
     disable(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY)
+
+    changeDefaultVisibility { it.withVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY) }
+    changeDefaultVisibility { it.withVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE) }
+    changeDefaultVisibility { it.withVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE) }
+
+    changeDefaultPropertyInclusion { it.withValueInclusion(JsonInclude.Include.NON_NULL) }
+  }
+
+  @Test
+  fun `function 의 경우 직렬화 되지 않도록 visibility 설정`() {
+    val json = jsonMapper.writeValueAsString(SampleRequest("chat", 20, false))
+    assertThat(json).doesNotContain("isDeleted")
+  }
+
+  @Test
+  fun `null 의 경우 직렬화 되지 않도록 설정`() {
+    val json = jsonMapper.writeValueAsString(SampleRequest("chat", null, false))
+    assertThat(json).doesNotContain("age")
   }
 
   @Test
@@ -100,11 +123,14 @@ private data class NameRequest(
 
 private data class SampleRequest(
   val name: String,
+  val age: Int?,
   val deleted: Boolean,
   val ids: List<String> = emptyList(),
   val sampleEnum: SampleEnum = SampleEnum.TEST_1,
   val nullableSampleEnum: SampleEnum? = SampleEnum.TEST_2,
-)
+) {
+  fun isDeleted(): Boolean = deleted
+}
 
 private enum class SampleEnum {
   TEST_1, TEST_2
