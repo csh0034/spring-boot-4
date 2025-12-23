@@ -138,6 +138,9 @@
   - 추가로 spring boot 에서는 하단 2개 비활성화하였음
   - .disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS, DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS);
 
+> jackson2 의 fail-on-unknown-properties 의 default 값은 true 이지만 spring boot 3.x 에서   
+> Jackson2ObjectMapperBuilder.customizeDefaultFeatures 에 의해 false 로 사용하고 있었음
+
 ### kotlin module 의존성 변경
 
 - https://github.com/FasterXML/jackson-module-kotlin
